@@ -1,0 +1,23 @@
+#ifndef _huffmanTree_h
+#define _huffmanTree_h
+
+typedef struct {
+	char* code;
+	int codeLength;
+} codeObject;
+
+typedef struct huffmanNode {
+	int frequency;
+	char symbol;
+	struct huffmanNode* leftChild;
+	struct huffmanNode* rightChild;
+} huffmanNode;
+
+
+typedef struct {
+	huffmanNode* root;
+	int numberOfNodes;
+} huffmanTree;
+
+void clearCodeObject(codeObject* CodeObject);
+#endif

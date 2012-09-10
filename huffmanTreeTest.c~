@@ -1,0 +1,75 @@
+/* testing the implementation of huffman coding */
+
+int main(int argc, const char* argv[])
+{
+	huffmanTree* HuffmanTree = malloc(sizeof(huffmanTree));
+	HuffmanTree->root = NULL;
+	HuffmanTree->numberOfNodes = 0;
+	
+	huffmanNode* HuffmanNode = createHuffmanNode();
+	HuffmanNode->frequency = 15;
+	HuffmanNode->symbol = 'E';
+	huffmanInsert(HuffmanTree, HuffmanNode);
+	
+	huffmanNode* HuffmanNode1 = createHuffmanNode();
+	HuffmanNode1->frequency = 13;
+	HuffmanNode1->symbol = ' ';
+	huffmanInsert(HuffmanTree, HuffmanNode1);
+	
+	huffmanNode* HuffmanNode2 = createHuffmanNode();
+	HuffmanNode2->frequency = 12;
+	HuffmanNode2->symbol = 'I';
+	huffmanInsert(HuffmanTree, HuffmanNode2);
+
+	huffmanNode* HuffmanNode3 = createHuffmanNode();
+	HuffmanNode3->frequency = 10;
+	HuffmanNode3->symbol = 'A';
+	huffmanInsert(HuffmanTree, HuffmanNode3);
+
+	huffmanNode* HuffmanNode4 = createHuffmanNode();
+	HuffmanNode4->frequency = 4;
+	HuffmanNode4->symbol = 'T';
+	huffmanInsert(HuffmanTree, HuffmanNode4);
+
+	huffmanNode* HuffmanNode5 = createHuffmanNode();
+	HuffmanNode5->frequency = 3;
+	HuffmanNode5->symbol = 'S';
+	huffmanInsert(HuffmanTree, HuffmanNode5);
+
+	huffmanNode* HuffmanNode6 = createHuffmanNode();
+	HuffmanNode6->frequency = 1;
+	HuffmanNode6->symbol = '\n';
+	huffmanInsert(HuffmanTree, HuffmanNode6);
+
+	showEncode(HuffmanTree, 'A');
+	showEncode(HuffmanTree, ' ');
+	showEncode(HuffmanTree, 'a');
+	showEncode(HuffmanTree, 'm');
+
+
+	
+	char* testCode = "0111011011110111110";
+	char* output = analyzeCodeword(HuffmanTree, testCode);
+	printf("\nThe output for %s is %s.\n", testCode, output);
+
+	/* Other than the root node's left child which we get with a path of '0' all other
+	 * nodes added produce a '0' and a '1' kind of path in the tree. So the total 
+	 * number of bits is twice the number of data nodes less one.
+	 */
+	float numberOfBits = (2*(HuffmanTree->numberOfNodes))-1;
+	float numberOfSymbols = HuffmanTree->numberOfNodes;
+	float avgBitsPerSymbol = (numberOfBits/numberOfSymbols);
+	printf("\n\nThe average no. of bits per symbol is %f\n", avgBitsPerSymbol);
+
+	showEncode(HuffmanTree, 'A');
+	showEncode(HuffmanTree, ' ');
+	showEncode(HuffmanTree, 'a');
+	showEncode(HuffmanTree, 'm');
+
+
+	clearHuffmanTree(HuffmanTree);
+
+	return 0;
+}
+	
+	

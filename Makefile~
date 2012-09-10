@@ -1,0 +1,12 @@
+CFLAGS=-Wall -g -DNDEBUG
+
+all: huffmanTree
+
+asn2p1: binaryHeap.o
+
+asn2p2: ttTree.o
+
+asn2p4: avlTree.o stack.o
+
+clean:
+	rm -f huffmanTree binaryHeap.o asn2p1 ttTree.o asn2p2 avlTree.o asn2p4 stack.o
